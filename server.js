@@ -4,14 +4,17 @@ const express = require('express')
 const mongoose = require('mongoose')
 const reportRoutes = require('./routes/reports')
 const cors = require('cors');
+const app = express();
 
 
 //express app
-const app = express()
+
+
+app.use(cors());
 
 //middleware
 
-app.use(cors());
+
 app.use(express.json()) // invoca o middleware do json para que o req funcione.
 app.use((req, res, next) => {
    console.log(req.path, req.method)   
@@ -19,7 +22,7 @@ app.use((req, res, next) => {
 })
 
 //routes
-app.use( '/api/reports' , reportRoutes)
+app.use( '/' , reportRoutes)
 
 //connect to db
 mongoose.connect(process.env.MONGO_URL)
